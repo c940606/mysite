@@ -10,14 +10,12 @@ jobs:
       - name: Checkout    
         uses: actions/checkout@v2    #这里使用了github官方提供的action,checkout项目到虚拟机上
 
-      - name: cd 
-        run: cd frontend
-      - name: Install Dependencies
-        run: npm install 
       - name: Build
-        run: npm run build
+        run: |
+          cd frontend
+          npm install
+          npm run build
 
-      
       - name: deploy file to server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:  
