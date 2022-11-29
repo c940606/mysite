@@ -21,6 +21,6 @@ jobs:
         with:  
           username: 'root'   #ssh user name
           server: '101.43.104.15' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.FTP_PASSWORD }} #引用之前创建好的secret
+          password: ${{ secrets.FTP_PASSWORD }} #引用之前创建好的secret
           local_path: './frontend/build/*'  # 对应我们项目build的文件夹路径
           remote_path: '/www/wwwroot/powcai.top'
