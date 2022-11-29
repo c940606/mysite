@@ -23,7 +23,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:  
           username: 'root'   #ssh user name
-          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
-          local_path: './build/*'  # 对应我们项目build的文件夹路径
-          remote_path: '/var/www/react-app'
+          server: '101.43.104.15' #引用之前创建好的secret
+          ssh_private_key: ${{ secrets.FTP_PASSWORD }} #引用之前创建好的secret
+          local_path: './frontend/build/*'  # 对应我们项目build的文件夹路径
+          remote_path: '/www/wwwroot/powcai.top'
