@@ -1,1 +1,29 @@
 
+name: Continuous Deploy #action名称
+on: [push] #在推送的时候运行此action
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest  #运行环境
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2    #这里使用了github官方提供的action,checkout项目到虚拟机上
+
+      - name: cd 
+        run: cd frontend
+      - name: Install Dependencies
+        run: npm install 
+      - name: Build
+        run: npm run build
+
+      
+      - name: deploy file to server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
+        with:  
+          username: 'root'   #ssh user name
+          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
+          local_path: './build/*'  # 对应我们项目build的文件夹路径
+          remote_path: '/var/www/react-app'
