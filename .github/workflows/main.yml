@@ -15,6 +15,7 @@ jobs:
           cd frontend
           npm install
           npm run build
+          ls -la
 
       - name: deploy file to server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
