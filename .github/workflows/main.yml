@@ -19,7 +19,7 @@ jobs:
       - name: deploy file to server
         uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:  
-          username: 'powcai.top'   #ssh user name
+          username: 'powcai_top'   #ssh user name
           server: '101.43.104.15' #引用之前创建好的secret
           password: ${{ secrets.FTP_PASSWORD }} #引用之前创建好的secret
           local_path: './frontend/build/*'  # 对应我们项目build的文件夹路径
