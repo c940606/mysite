@@ -17,7 +17,7 @@ const options = reactive({
   volume: 0.3, //默认音量大小
   control: true, //是否显示控制器
   title: '', //视频名称
-  src: "http://127.0.0.1:8000/static/1.mp4", //视频源
+  src: `${import.meta.env.VITE_API_URL}/video`, //视频源
   poster: '', //封面
 })
 const onPlay = (ev) => {
