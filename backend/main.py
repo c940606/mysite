@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import StreamingResponse, FileResponse
 import uvicorn
 import os
+from typing import BinaryIO
 
+from fastapi import FastAPI, HTTPException, Request, status, Response
+from fastapi.responses import StreamingResponse
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -23,23 +24,9 @@ app.add_middleware(
 )
 
 
-@app.get("/api/hello")
-async def root():
-    return {"message": "Hello World 111"}
-
-
-
-
-import os
-from typing import BinaryIO
-
-from fastapi import FastAPI, HTTPException, Request, status
-from fastapi.responses import StreamingResponse
-
-
-#https://github.com/tiangolo/fastapi/issues/1240
+# https://github.com/tiangolo/fastapi/issues/1240
 def send_bytes_range_requests(
-    file_obj: BinaryIO, start: int, end: int, chunk_size: int = 10_000
+        file_obj: BinaryIO, start: int, end: int, chunk_size: int = 10_000
 ):
     """Send a file in chunks using Range Requests specification RFC7233
 
@@ -72,7 +59,7 @@ def _get_range_header(range_header: str, file_size: int) -> tuple[int, int]:
 
 
 def range_requests_response(
-    request: Request, file_path: str, content_type: str
+        request: Request, file_path: str, content_type: str
 ):
     """Returns StreamingResponse using Range Requests of a given file"""
 
@@ -107,15 +94,16 @@ def range_requests_response(
     )
 
 
-app = FastAPI()
-
-
 @app.get("/video")
 def get_video(request: Request):
     return range_requests_response(
         request, file_path="./static/1.mp4", content_type="video/mp4"
     )
 
+
+@app.get("/hello")
+async def root():
+    return {"message": "Hello World 111"}
 
 
 if __name__ == '__main__':
