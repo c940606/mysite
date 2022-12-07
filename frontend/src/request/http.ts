@@ -55,7 +55,7 @@ class AppRequest {
 
 // 创建对象
 const http = new AppRequest({
-  baseURL: API_URL, // url链接
+  baseURL: import.meta.env.VITE_API_URL, // url链接
   timeout: TIME_OUT, // 超时时间
   headers: { "Content-Type": "application/json;charset=utf-8" }, // 请求头
   transformRequest: [
