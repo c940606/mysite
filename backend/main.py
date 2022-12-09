@@ -3,11 +3,18 @@ from fastapi.staticfiles import StaticFiles
 import uvicorn
 import os
 from typing import BinaryIO
-
+from tortoise import Tortoise
 from fastapi import FastAPI, HTTPException, Request, status, Response
 from fastapi.responses import StreamingResponse
 
+from database.register import register_tortoise
+from database.config import TORTOISE_ORM
+
+# enable schemas to read relationship between models
+Tortoise.init_models(["database.models"], "models")
+
 app = FastAPI()
+register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 origins = [
     "*",

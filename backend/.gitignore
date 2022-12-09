@@ -2,3 +2,4 @@ venv
 .idea
 static
 __pycache__
+database/config.py

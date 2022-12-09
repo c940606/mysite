@@ -1,34 +1,52 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-
+import { reactive } from 'vue';
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+
+const options = reactive({
+  width: '800px', //播放器高度
+  height: '450px', //播放器高度
+  color: "#409eff", //主题色
+  muted: false, //静音
+  webFullScreen: false,
+  speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
+  autoPlay: false, //自动播放
+  loop: false, //循环播放
+  mirror: false, //镜像画面
+  ligthOff: false,  //关灯模式
+  volume: 0.3, //默认音量大小
+  control: true, //是否显示控制器
+  title: '', //视频名称
+  src: `${import.meta.env.VITE_API_URL}/video`, //视频源
+  poster: '', //封面
+})
+const onPlay = (ev) => {
+  console.log('播放')
+}
+const onPause = (ev) => {
+  console.log(ev, '暂停')
+}
+
+const onTimeupdate = (ev) => {
+  console.log(ev, '时间更新')
+}
+const onCanplay = (ev) => {
+  console.log(ev, '可以播放')
+}
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+  <div>
+    <vue3VideoPlay 
+    v-bind="options" 
+    @play="onPlay"
+    @pause="onPause" 
+    @timeupdate="onTimeupdate" 
+    @canplay="onCanplay" />
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
 <style scoped>
