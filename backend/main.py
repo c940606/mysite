@@ -9,6 +9,7 @@ from fastapi.responses import StreamingResponse
 
 from database.register import register_tortoise
 from database.config import TORTOISE_ORM
+from pydantic import BaseModel
 
 # enable schemas to read relationship between models
 Tortoise.init_models(["database.models"], "models")
@@ -106,6 +107,16 @@ def get_video(request: Request):
     return range_requests_response(
         request, file_path="./static/1.mp4", content_type="video/mp4"
     )
+
+
+class Item(BaseModel):
+    search: str
+
+
+@app.post("/search")
+def get_video(item: Item):
+    print(item)
+    return {"code":200, "data":item, "msg":"hello world"}
 
 
 @app.get("/hello")
