@@ -1,11 +1,14 @@
 <template>
   <div>
-    <el-input
-      placeholder="请输入搜索关键词"
-      @keyup.enter="search"
-      v-model="keyword"
-    ></el-input>
-    <el-button type="primary" @click="search">搜索</el-button>
+    <div class="search">
+      <el-input
+        placeholder="请输入搜索关键词"
+        @keyup.enter="search"
+        v-model="keyword"
+      ></el-input>
+      <el-button type="primary" @click="search">搜索</el-button>
+    </div>
+
     {{ state.search_content }}
     <el-table :data="results" v-if="results.length > 0">
       <el-table-column prop="date" label="Date" width="180" />
@@ -54,4 +57,14 @@ const search = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.search {
+  display: flex;
+  justify-content: flex-start;
+}
+.search > el-input {
+  /* flex-shrink: 0;
+  width: 300px; */
+  margin-right: 20px;
+}
+</style>

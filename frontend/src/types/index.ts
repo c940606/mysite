@@ -32,3 +32,14 @@ export interface userInfoType {
   avatar: string; // 头像
   modifyTime: string; // 最后更新时间
 }
+
+/**
+ * 缓存用户信息的字段
+ */
+export interface UserInfo {
+  id: number | string; // 用户id
+  name: string; // 名称
+  image: string; // 头像
+  address: string; // 地址
+  update_time: string; // 最后更新时间
+}

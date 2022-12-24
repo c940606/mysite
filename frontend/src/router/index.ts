@@ -3,34 +3,52 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import Home from "@/views/home/index.vue";
+import Layout from "@/layout/Home/index.vue";
 
 import { TITLE } from "@/assets/global";
 import { getLocal } from "@/request/auth";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", redirect: "/search" }, // 重定向
+  { path: "/", redirect: "/dashboard" }, // 重定向
   {
     path: "/",
-    name: "home",
-    component: Home,
+    name: "Layout",
+    component: Layout,
     children: [
+      {
+        path: "/dashboard",
+        name: "Dashboard",
+        meta: {
+          title: "系统首页",
+          icon: "dashboard",
+          roles: ["admin", "teacher", "student"],
+        },
+        component: () => import("@/views/dashboard/index.vue"),
+      },
       {
         path: "/search",
         name: "search",
-        meta: { title: "搜索", icon: "el-icon-ali-home" },
+        meta: {
+          title: "搜索",
+          icon: "home",
+          roles: ["admin", "teacher", "student"],
+        },
         component: () => import("@/views/search/index.vue"),
       },
       {
         path: "/video",
         name: "video",
-        meta: { title: "视频", icon: "el-icon-ali-home" },
+        meta: {
+          title: "视频",
+          icon: "home",
+          roles: ["admin", "teacher", "student"],
+        },
         component: () => import("@/views/video/index.vue"),
       },
     ],
   },
 ];
-console.log(import.meta.env.BASE_URL);
+// console.log(import.meta.env.BASE_URL);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
