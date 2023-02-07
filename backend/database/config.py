@@ -6,7 +6,9 @@ TORTOISE_ORM = {
     "apps": {
         "models": {
             "models": [
-                "database.models"
+                # "database.models",
+                "api.user.models",
+                "aerich.models",
             ],
             "default_connection": "default"
         }
