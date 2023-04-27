@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "whitePage",
-    component: () => import("@/views/whitePage/index.vue"),
+    component: () => import("@/views/whitepage/index.vue"),
   }, // 重定向
   {
     path: "/",
