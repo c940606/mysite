@@ -4,12 +4,16 @@ import {
   type RouteRecordRaw,
 } from "vue-router";
 import Layout from "@/layout/Home/index.vue";
-
 import { TITLE } from "@/assets/global";
 import { getLocal } from "@/request/auth";
 
 const routes: RouteRecordRaw[] = [
-  { path: "/", redirect: "/dashboard" }, // 重定向
+  // { path: "/", redirect: "/dashboard" }, // 重定向
+  {
+    path: "/",
+    name: "whitePage",
+    component: () => import("@/views/whitePage/index.vue"),
+  }, // 重定向
   {
     path: "/",
     name: "Layout",

@@ -11,7 +11,7 @@ export const useStore = defineStore({
   id: "index",
   state: () => ({
     tagsList: [] as Tags[], // 标签列表
-    collapse: false as boolean, // 侧边栏是否折叠
+    collapse: true as boolean, // 侧边栏是否折叠
     userInfo: {} as UserInfo, // 用户信息
     messages: 4 as number, // 消息数量
   }),
